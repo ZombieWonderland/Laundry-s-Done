@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="RSB-lP-8Pv">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Timer-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Half_and_Half_UIStack" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LaundryTimerViewController" customModule="Laundry_Timer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -18,15 +18,121 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="oxl-Fn-GZr">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f7f-za-jMu">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
+                                    <view contentMode="redraw" restorationIdentifier="washer" translatesAutoresizingMaskIntoConstraints="NO" id="f7f-za-jMu" customClass="LaundryView" customModule="Laundry_Timer" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="276"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.01" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o0C-jI-zhl">
+                                                <rect key="frame" x="173" y="78" width="255" height="120"/>
+                                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="100"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="nEa-P1-7IZ">
+                                                <rect key="frame" x="228" y="206" width="145" height="60"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aPb-c0-2Tu">
+                                                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="60" id="N52-kI-bVH"/>
+                                                            <constraint firstAttribute="height" constant="60" id="NJr-fF-eUQ"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Start">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="startTimer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Sxb-sp-Cb3"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iPs-8v-vC0">
+                                                        <rect key="frame" x="85" y="0.0" width="60" height="60"/>
+                                                        <state key="normal" title="Stop">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="stopTimer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ehR-8u-A3g"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="iPs-8v-vC0" firstAttribute="height" secondItem="aPb-c0-2Tu" secondAttribute="height" id="Keg-so-vYk"/>
+                                                    <constraint firstItem="iPs-8v-vC0" firstAttribute="width" secondItem="aPb-c0-2Tu" secondAttribute="width" id="qc2-7p-wMv"/>
+                                                </constraints>
+                                            </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Washer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZEY-jZ-ySo">
+                                                <rect key="frame" x="240" y="27" width="120" height="43"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
                                         <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="ZEY-jZ-ySo" firstAttribute="centerX" secondItem="o0C-jI-zhl" secondAttribute="centerX" id="4WB-xW-Ge5"/>
+                                            <constraint firstItem="o0C-jI-zhl" firstAttribute="centerY" secondItem="f7f-za-jMu" secondAttribute="centerY" id="76A-MT-kD8"/>
+                                            <constraint firstItem="nEa-P1-7IZ" firstAttribute="centerX" secondItem="f7f-za-jMu" secondAttribute="centerX" id="Gfg-AS-2I6"/>
+                                            <constraint firstItem="nEa-P1-7IZ" firstAttribute="top" secondItem="o0C-jI-zhl" secondAttribute="bottom" constant="8" symbolic="YES" id="HIW-TS-J3d"/>
+                                            <constraint firstItem="o0C-jI-zhl" firstAttribute="top" secondItem="ZEY-jZ-ySo" secondAttribute="bottom" constant="8" id="S93-Lx-sYY"/>
+                                            <constraint firstItem="o0C-jI-zhl" firstAttribute="centerX" secondItem="f7f-za-jMu" secondAttribute="centerX" id="Ytg-C9-dKP"/>
+                                        </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CsO-xg-a1R">
-                                        <rect key="frame" x="0.0" y="300" width="600" height="300"/>
+                                    <view contentMode="scaleToFill" restorationIdentifier="dryer" translatesAutoresizingMaskIntoConstraints="NO" id="CsO-xg-a1R" customClass="LaundryView" customModule="Laundry_Timer" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="276" width="600" height="275"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Yr-sl-B09">
+                                                <rect key="frame" x="173" y="77" width="255" height="120"/>
+                                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="100"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="yy2-DL-SAr">
+                                                <rect key="frame" x="228" y="205" width="145" height="60"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uMN-kQ-UmL">
+                                                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="60" id="UjR-gH-HM7"/>
+                                                            <constraint firstAttribute="height" constant="60" id="rUX-qa-FtF"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Start">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="startTimer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JYD-KN-onP"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ud5-8g-9i8">
+                                                        <rect key="frame" x="85" y="0.0" width="60" height="60"/>
+                                                        <state key="normal" title="Stop">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="stopTimer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ktw-f2-AkC"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="Ud5-8g-9i8" firstAttribute="width" secondItem="uMN-kQ-UmL" secondAttribute="width" id="Kxr-kr-rCu"/>
+                                                    <constraint firstItem="Ud5-8g-9i8" firstAttribute="height" secondItem="uMN-kQ-UmL" secondAttribute="height" id="WQ3-uX-oyx"/>
+                                                </constraints>
+                                            </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dryer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5kI-8X-xtE">
+                                                <rect key="frame" x="258" y="26" width="86" height="43"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
                                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="2Yr-sl-B09" firstAttribute="top" secondItem="5kI-8X-xtE" secondAttribute="bottom" constant="8" id="UDp-6d-FbE"/>
+                                            <constraint firstItem="2Yr-sl-B09" firstAttribute="centerX" secondItem="CsO-xg-a1R" secondAttribute="centerX" id="cuO-Fp-shZ"/>
+                                            <constraint firstItem="Ud5-8g-9i8" firstAttribute="top" secondItem="2Yr-sl-B09" secondAttribute="bottom" constant="8" id="f6i-aU-szP"/>
+                                            <constraint firstItem="2Yr-sl-B09" firstAttribute="centerY" secondItem="CsO-xg-a1R" secondAttribute="centerY" id="rFB-xK-BZR"/>
+                                            <constraint firstItem="5kI-8X-xtE" firstAttribute="centerX" secondItem="2Yr-sl-B09" secondAttribute="centerX" id="ssg-ne-gST"/>
+                                            <constraint firstItem="yy2-DL-SAr" firstAttribute="centerX" secondItem="CsO-xg-a1R" secondAttribute="centerX" id="vxN-iy-fYV"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
                                 <variation key="heightClass=compact" axis="horizontal"/>
@@ -35,15 +141,176 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="oxl-Fn-GZr" secondAttribute="trailing" id="SKo-W6-EGm"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="oxl-Fn-GZr" secondAttribute="bottom" id="gtC-L7-tvi"/>
                             <constraint firstItem="oxl-Fn-GZr" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="mqn-OH-H4f"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="oxl-Fn-GZr" secondAttribute="bottom" id="s8N-Ws-DJA"/>
                             <constraint firstItem="oxl-Fn-GZr" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="veB-nT-58T"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Timer" image="washing" id="pvK-WS-hjh"/>
+                    <connections>
+                        <outlet property="dryerView" destination="CsO-xg-a1R" id="Sza-co-rKq"/>
+                        <outlet property="washerView" destination="f7f-za-jMu" id="3qP-Tt-Izu"/>
+                        <outletCollection property="timeLabels" destination="o0C-jI-zhl" collectionClass="NSMutableArray" id="aDE-sl-dA8"/>
+                        <outletCollection property="timeLabels" destination="2Yr-sl-B09" collectionClass="NSMutableArray" id="gTa-90-Umn"/>
+                        <outletCollection property="startButtons" destination="aPb-c0-2Tu" collectionClass="NSMutableArray" id="xN3-kV-fyx"/>
+                        <outletCollection property="stopButtons" destination="iPs-8v-vC0" collectionClass="NSMutableArray" id="pHk-7g-vvG"/>
+                        <outletCollection property="startButtons" destination="uMN-kQ-UmL" collectionClass="NSMutableArray" id="z4g-F9-LJw"/>
+                        <outletCollection property="stopButtons" destination="Ud5-8g-9i8" collectionClass="NSMutableArray" id="ZlS-Zu-hRh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="458" y="453"/>
+            <point key="canvasLocation" x="512" y="173"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="pez-7N-8I1">
+            <objects>
+                <viewController id="xrS-9X-yt6" customClass="SettingsViewController" customModule="Laundry_Timer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3ZF-93-NlH"/>
+                        <viewControllerLayoutGuide type="bottom" id="EYD-Ir-UQ6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="RjM-bW-2hN">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uWI-yf-s7z">
+                                <rect key="frame" x="0.0" y="20" width="600" height="531"/>
+                            </scrollView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="nwK-cw-Ip0">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" restorationIdentifier="washer" translatesAutoresizingMaskIntoConstraints="NO" id="SsH-Ui-GpW" customClass="LaundryView" customModule="Laundry_Timer" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="276"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="Ib7-38-2xg">
+                                                <rect key="frame" x="240" y="45" width="120" height="185"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Washer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LVg-KQ-1Qa">
+                                                        <rect key="frame" x="0.0" y="0.0" width="120" height="43"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="washerMinutes" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="45" translatesAutoresizingMaskIntoConstraints="NO" id="N5i-UX-v4X">
+                                                        <rect key="frame" x="15" y="73" width="90" height="60"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="90" id="eeQ-C5-emO"/>
+                                                            <constraint firstAttribute="height" constant="60" id="rFa-va-BZk"/>
+                                                        </constraints>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="45"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                        <connections>
+                                                            <action selector="textFieldBeingEdited:" destination="xrS-9X-yt6" eventType="editingChanged" id="Xdl-DV-m98"/>
+                                                            <action selector="washMinutesEditingBegan:" destination="xrS-9X-yt6" eventType="editingDidBegin" id="NJX-KG-Ms7"/>
+                                                            <action selector="washingMinutesEditingEnded:" destination="xrS-9X-yt6" eventType="editingDidEnd" id="Tep-HF-I9M"/>
+                                                        </connections>
+                                                    </textField>
+                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="minutes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xFx-R7-QtE">
+                                                        <rect key="frame" x="28" y="163" width="65" height="22"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="Ib7-38-2xg" firstAttribute="centerY" secondItem="SsH-Ui-GpW" secondAttribute="centerY" id="Vp8-fi-lsb"/>
+                                            <constraint firstItem="Ib7-38-2xg" firstAttribute="centerX" secondItem="SsH-Ui-GpW" secondAttribute="centerX" id="ZhI-fv-1jx"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" restorationIdentifier="dryer" translatesAutoresizingMaskIntoConstraints="NO" id="A3g-SB-7aN" customClass="LaundryView" customModule="Laundry_Timer" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="276" width="600" height="275"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="lea-uP-nDa">
+                                                <rect key="frame" x="255" y="45" width="90" height="185"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dryer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sLH-mC-0dF">
+                                                        <rect key="frame" x="2" y="0.0" width="86" height="43"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="dryerMinutes" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="45" translatesAutoresizingMaskIntoConstraints="NO" id="GqQ-G2-pVt">
+                                                        <rect key="frame" x="0.0" y="73" width="90" height="60"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="60" id="BBY-5B-UQ3"/>
+                                                            <constraint firstAttribute="width" constant="90" id="q4A-Ra-31v"/>
+                                                        </constraints>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="45"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                        <connections>
+                                                            <action selector="dryerMinutesEditingBegan:" destination="xrS-9X-yt6" eventType="editingDidBegin" id="Yq6-UQ-iai"/>
+                                                            <action selector="dryerMinutesEditingEnded:" destination="xrS-9X-yt6" eventType="editingDidEnd" id="1N5-c8-kcJ"/>
+                                                        </connections>
+                                                    </textField>
+                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="minutes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ujf-pU-mfX">
+                                                        <rect key="frame" x="13" y="163" width="65" height="22"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="lea-uP-nDa" firstAttribute="centerY" secondItem="A3g-SB-7aN" secondAttribute="centerY" id="7T3-rN-He5"/>
+                                            <constraint firstItem="lea-uP-nDa" firstAttribute="centerX" secondItem="A3g-SB-7aN" secondAttribute="centerX" id="pia-dv-n99"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <variation key="heightClass=compact" axis="horizontal"/>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="nwK-cw-Ip0" secondAttribute="trailing" id="KkS-S5-rdz"/>
+                            <constraint firstItem="nwK-cw-Ip0" firstAttribute="leading" secondItem="RjM-bW-2hN" secondAttribute="leading" id="R85-Vx-oW9"/>
+                            <constraint firstItem="nwK-cw-Ip0" firstAttribute="top" secondItem="RjM-bW-2hN" secondAttribute="top" id="RVJ-yg-jWR"/>
+                            <constraint firstItem="uWI-yf-s7z" firstAttribute="leading" secondItem="RjM-bW-2hN" secondAttribute="leading" id="ava-WM-maR"/>
+                            <constraint firstAttribute="trailing" secondItem="uWI-yf-s7z" secondAttribute="trailing" id="by9-wb-tNH"/>
+                            <constraint firstItem="uWI-yf-s7z" firstAttribute="top" secondItem="3ZF-93-NlH" secondAttribute="bottom" id="nMe-M2-8Zy"/>
+                            <constraint firstItem="EYD-Ir-UQ6" firstAttribute="top" secondItem="nwK-cw-Ip0" secondAttribute="bottom" id="pQe-Vz-vfU"/>
+                            <constraint firstItem="EYD-Ir-UQ6" firstAttribute="top" secondItem="uWI-yf-s7z" secondAttribute="bottom" id="sKu-nO-ueh"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Settings" image="gear" id="P5N-2x-NOc"/>
+                    <connections>
+                        <outlet property="dryerMinutesText" destination="GqQ-G2-pVt" id="lS5-b2-AhA"/>
+                        <outlet property="dryerScrollView" destination="uWI-yf-s7z" id="tRD-yo-huE"/>
+                        <outlet property="washMinutesText" destination="N5i-UX-v4X" id="MNr-jo-zac"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wh6-MC-ULN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="523" y="881"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="FCb-tO-8Uo">
+            <objects>
+                <tabBarController id="RSB-lP-8Pv" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="etv-Qr-W4P">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="QzF-h9-omc"/>
+                        <segue destination="xrS-9X-yt6" kind="relationship" relationship="viewControllers" id="0oh-hX-wOW"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DVy-IL-mvN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-360" y="330"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="gear" width="30" height="30"/>
+        <image name="washing" width="30" height="30"/>
+    </resources>
 </document>

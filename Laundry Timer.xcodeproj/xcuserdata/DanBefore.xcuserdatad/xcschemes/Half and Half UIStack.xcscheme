@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F2C26B7B1CB81A7F006BB71C"
-               BuildableName = "Half and Half UIStack.app"
-               BlueprintName = "Half and Half UIStack"
-               ReferencedContainer = "container:Half and Half UIStack.xcodeproj">
+               BuildableName = "Laundry Timer.app"
+               BlueprintName = "Laundry Timer"
+               ReferencedContainer = "container:Laundry Timer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F2C26B8F1CB81A7F006BB71C"
-               BuildableName = "Half and Half UIStackTests.xctest"
-               BlueprintName = "Half and Half UIStackTests"
-               ReferencedContainer = "container:Half and Half UIStack.xcodeproj">
+               BuildableName = "Laundry Timer.xctest"
+               BlueprintName = "Laundry TimerTests"
+               ReferencedContainer = "container:Laundry Timer.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F2C26B9A1CB81A7F006BB71C"
-               BuildableName = "Half and Half UIStackUITests.xctest"
-               BlueprintName = "Half and Half UIStackUITests"
-               ReferencedContainer = "container:Half and Half UIStack.xcodeproj">
+               BuildableName = "Laundry Timer.xctest"
+               BlueprintName = "Laundry TimerUITests"
+               ReferencedContainer = "container:Laundry Timer.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F2C26B7B1CB81A7F006BB71C"
-            BuildableName = "Half and Half UIStack.app"
-            BlueprintName = "Half and Half UIStack"
-            ReferencedContainer = "container:Half and Half UIStack.xcodeproj">
+            BuildableName = "Laundry Timer.app"
+            BlueprintName = "Laundry Timer"
+            ReferencedContainer = "container:Laundry Timer.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F2C26B7B1CB81A7F006BB71C"
-            BuildableName = "Half and Half UIStack.app"
-            BlueprintName = "Half and Half UIStack"
-            ReferencedContainer = "container:Half and Half UIStack.xcodeproj">
+            BuildableName = "Laundry Timer.app"
+            BlueprintName = "Laundry Timer"
+            ReferencedContainer = "container:Laundry Timer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -95,9 +95,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F2C26B7B1CB81A7F006BB71C"
-            BuildableName = "Half and Half UIStack.app"
-            BlueprintName = "Half and Half UIStack"
-            ReferencedContainer = "container:Half and Half UIStack.xcodeproj">
+            BuildableName = "Laundry Timer.app"
+            BlueprintName = "Laundry Timer"
+            ReferencedContainer = "container:Laundry Timer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
