@@ -16,12 +16,12 @@ class LaundryMachine
     let stopButton: UIButton
     private let timeDisplayLabel: UILabel
     
-    private var startTime: NSTimeInterval = 0.0
+    private var startTime: TimeInterval = 0.0
     
-    private var initialTime: NSTimeInterval = 0.0
-    private var elapsedTime: NSTimeInterval = 0.0
+    private var initialTime: TimeInterval = 0.0
+    private var elapsedTime: TimeInterval = 0.0
     
-    private var timer: NSTimer?
+    private var timer: Timer?
     private var alarm : AVAudioPlayer?
     
     var initialMinutes = [
@@ -54,8 +54,8 @@ class LaundryMachine
         timer = nil
         
         // Make sure inital time is the same as what's saved in user preferences
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let savedMinutes = defaults.integerForKey(self.name)
+        let defaults = UserDefaults.standard()
+        let savedMinutes = defaults.integer(forKey: self.name)
         if savedMinutes != 0 {
             let savedSeconds = savedMinutes * LaundryModel.SecondsInAMinute            
             if initialTime != Double(savedSeconds) && savedSeconds != 0 {
@@ -64,8 +64,8 @@ class LaundryMachine
         }
         
         formatAndDisplayRemainingTime(initialTime)
-        startButton.setTitle(LaundryModel.StartText, forState: .Normal)
-        stopButton.setTitle(LaundryModel.StopText, forState: .Normal)
+        startButton.setTitle(LaundryModel.StartText, for: UIControlState())
+        stopButton.setTitle(LaundryModel.StopText, for: UIControlState())
     }
     
 
@@ -77,14 +77,14 @@ class LaundryMachine
         initializeAndFireTimer()
         
         // Change button text to "restart" since that is what tapping it will do now
-        startButton.setTitle(LaundryModel.RestartText, forState: .Normal)
+        startButton.setTitle(LaundryModel.RestartText, for: UIControlState())
         
 
     }
     
     func initializeAndFireTimer() {
-        startTime = NSDate.timeIntervalSinceReferenceDate()
-        timer = NSTimer.scheduledTimerWithTimeInterval(0.2,
+        startTime = Date.timeIntervalSinceReferenceDate
+        timer = Timer.scheduledTimer(timeInterval: 0.2,
                                                        target: self,
                                                        selector: #selector(LaundryMachine.fire),
                                                        userInfo: nil,
@@ -96,13 +96,13 @@ class LaundryMachine
         timer = nil
         alarm?.stop()
         
-        startButton.setTitle(LaundryModel.ResetText, forState: .Normal)
-        stopButton.setTitle(LaundryModel.ResumeText, forState: .Normal)
+        startButton.setTitle(LaundryModel.ResetText, for: UIControlState())
+        stopButton.setTitle(LaundryModel.ResumeText, for: UIControlState())
     }
     
     func resumeTimer() {
         //reset timer with existing amoutn of time left
-        stopButton.setTitle(LaundryModel.StopText, forState: .Normal)
+        stopButton.setTitle(LaundryModel.StopText, for: UIControlState())
         
         // update initial time to displayed time
         let remaining = getRemainingTime()
@@ -111,7 +111,7 @@ class LaundryMachine
     }
     
     @objc func fire() {
-        let currentTime = NSDate.timeIntervalSinceReferenceDate()
+        let currentTime = Date.timeIntervalSinceReferenceDate
         elapsedTime = currentTime - startTime
         
         if elapsedTime >= initialTime {
@@ -123,10 +123,10 @@ class LaundryMachine
     }
     
   
-    func formatAndDisplayRemainingTime(timeInterval: NSTimeInterval)
+    func formatAndDisplayRemainingTime(_ timeInterval: TimeInterval)
     {
         let minutesToDisplay = Double(timeInterval) / Constants.SecondsInAMinute
-        let secondsToDisplay = Double(timeInterval) %  Constants.SecondsInAMinute
+        let secondsToDisplay = Double(timeInterval).truncatingRemainder(dividingBy: Constants.SecondsInAMinute)
         let formattedMinutes = String(format: "%01d", Int(minutesToDisplay))
         let formattedSeconds = String(format: "%02d", Int(secondsToDisplay))   // display with inital zero
         timeDisplayLabel.text = "\(formattedMinutes):\(formattedSeconds)"
@@ -139,32 +139,32 @@ class LaundryMachine
         alarm?.play()
     }
     
-    func setupAudioPlayerWithFile(file:NSString, type:NSString) -> AVAudioPlayer?
+    func setupAudioPlayerWithFile(_ file:NSString, type:NSString) -> AVAudioPlayer?
     {
-        let path = NSBundle.mainBundle().pathForResource(file as String, ofType: type as String)
-        let url = NSURL.fileURLWithPath(path!)
+        let path = Bundle.main().pathForResource(file as String, ofType: type as String)
+        let url = URL(fileURLWithPath: path!)
         var audioPlayer:AVAudioPlayer?
         do {
-            try audioPlayer = AVAudioPlayer(contentsOfURL: url)
+            try audioPlayer = AVAudioPlayer(contentsOf: url)
         } catch {
             print("Player not available")
         }
         return audioPlayer
     }
     
-    func getInitialTime() -> NSTimeInterval {
+    func getInitialTime() -> TimeInterval {
         return initialTime
     }
     
-    func setInitialTime(newInitialTime: NSTimeInterval) {
+    func setInitialTime(_ newInitialTime: TimeInterval) {
         initialTime = newInitialTime
     }
     
     // from a running timer
-    func getRemainingTime() ->  NSTimeInterval?
+    func getRemainingTime() ->  TimeInterval?
     {
         if timer != nil {
-            let currentTime = NSDate.timeIntervalSinceReferenceDate()
+            let currentTime = Date.timeIntervalSinceReferenceDate
             let finishTime = initialTime + startTime
             return finishTime - currentTime
         } else if elapsedTime != 0.0 {
