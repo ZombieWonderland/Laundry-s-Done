@@ -37,10 +37,10 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, KeyboardDel
     
     let fullMachineNames = [ Constants.Washer: "Washing machine", Constants.Dryer: "Dryer"]
     
-    let defaults = NSUserDefaults.standardUserDefaults()
+    let defaults = UserDefaults.standard()
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default().removeObserver(self)
     }
 
     override func viewDidLoad()
@@ -54,21 +54,21 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, KeyboardDel
         dryerMinutesText.delegate = self
         
         // see if user had stored Washer minutes
-        if let savedWasherMinutes = defaults.stringForKey(Constants.Washer) {
+        if let savedWasherMinutes = defaults.string(forKey: Constants.Washer) {
             washMinutesText.text = "\(savedWasherMinutes)"
         } else {
             washMinutesText.text = "\(Constants.WasherMinutesDefault)"
         }
         
         // see if user had stored Dryer minutes
-        if let savedDryerMinutes = defaults.stringForKey(Constants.Dryer) {
+        if let savedDryerMinutes = defaults.string(forKey: Constants.Dryer) {
             dryerMinutesText.text = "\(savedDryerMinutes)"
         } else {
             dryerMinutesText.text = "\(Constants.DryerMinutesDefault)"
         }
         
         // initialize custom keyboard for iPad only, since iPhone can use the Number Pad
-        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+        if UIDevice.current().userInterfaceIdiom == .pad {
             initializeCustomKeyboard()
         }
         
@@ -76,7 +76,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, KeyboardDel
         setUpCancelDoneButtonsOnNumberPad()
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         deregisterFromKeyboardNotifications()
     }
@@ -86,20 +86,20 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, KeyboardDel
     
     func setUpCancelDoneButtonsOnNumberPad()
     {
-        let numberToolbar = UIToolbar(frame: CGRectMake(0, 0, self.view.frame.size.width, 50))
-        numberToolbar.barStyle = UIBarStyle.Default
+        let numberToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 50))
+        numberToolbar.barStyle = UIBarStyle.default
         
         numberToolbar.items = [
-            UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SettingsViewController.cancelNumberPad)),
-            UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil),
-            UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SettingsViewController.doneWithNumberPad))]
+            UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.plain, target: self, action: #selector(SettingsViewController.cancelNumberPad)),
+            UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil),
+            UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(SettingsViewController.doneWithNumberPad))]
         
         numberToolbar.sizeToFit()
         washMinutesText.inputAccessoryView = numberToolbar
         dryerMinutesText.inputAccessoryView = numberToolbar
     }
     
-    @objc func cancelNumberPad(sender:UIBarButtonItem)
+    @objc func cancelNumberPad(_ sender:UIBarButtonItem)
     {
         // restore original string value
         if let previousWashing = washingMinutesBeforeEditing {
@@ -145,12 +145,12 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, KeyboardDel
     //      Save state of minutes before editing starts
     //      so we can revert to it if the user taps "Cancel" in the number pad
     //
-    @IBAction func washMinutesEditingBegan(sender: UITextField)
+    @IBAction func washMinutesEditingBegan(_ sender: UITextField)
     {
         washingMinutesBeforeEditing = Int(washMinutesText.text!)
     }
 
-    @IBAction func dryerMinutesEditingBegan(sender: UITextField)
+    @IBAction func dryerMinutesEditingBegan(_ sender: UITextField)
     {
         dryerMinutesBeforeEditing = Int(dryerMinutesText.text!)
     }
@@ -160,17 +160,17 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, KeyboardDel
     //      check for valid ( > 0) values and
     //      Save new values of minutes to user defaults
     //
-    @IBAction func washingMinutesEditingEnded(sender: UITextField)
+    @IBAction func washingMinutesEditingEnded(_ sender: UITextField)
     {
         minutesEditingHasFinished(sender, whichMachine: Constants.Washer)
     }
 
-    @IBAction func dryerMinutesEditingEnded(sender: UITextField)
+    @IBAction func dryerMinutesEditingEnded(_ sender: UITextField)
     {
         minutesEditingHasFinished(sender, whichMachine: Constants.Dryer)
     }
     
-    func minutesEditingHasFinished(textField: UITextField, whichMachine: String)
+    func minutesEditingHasFinished(_ textField: UITextField, whichMachine: String)
     {
         guard let newMinutes = Int(textField.text!) where newMinutes != 0 else {
             showAlert(whichMachine)
@@ -178,7 +178,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, KeyboardDel
         }
         
         // Remember new values
-        defaults.setInteger(newMinutes, forKey: whichMachine)
+        defaults.set(newMinutes, forKey: whichMachine)
         
         // Get rid of any preceeding zeros in the label string
         // Ex. changes "098" to 98 to "98"
@@ -190,9 +190,9 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, KeyboardDel
     //
     //  Show an alert if the user tries to enter in "0" or "" for minutes value
     //
-    func showAlert(whichMachine: String) {
-        let alert = UIAlertController(title: "The \(fullMachineNames[whichMachine]!) timer needs more minutes", message: "Please enter some minutes", preferredStyle: .Alert)
-        let action = UIAlertAction(title: "Okay", style: .Default) { (UIAlertAction) -> Void  in
+    func showAlert(_ whichMachine: String) {
+        let alert = UIAlertController(title: "The \(fullMachineNames[whichMachine]!) timer needs more minutes", message: "Please enter some minutes", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Okay", style: .default) { (UIAlertAction) -> Void  in
             switch whichMachine {
             case Constants.Washer: self.washMinutesText.becomeFirstResponder()
             case Constants.Dryer: self.dryerMinutesText.becomeFirstResponder()
@@ -200,10 +200,10 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, KeyboardDel
             }
         }
         alert.addAction(action)
-        presentViewController(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         self.activeTextField = textField
     }
     
@@ -212,7 +212,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, KeyboardDel
     //  Make sure only numbers can appear in text fields, and
     //  limit length (see Constants.TextFieldMaxLength)
     //
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
     {
         //  Make sure only numbers can appear in text fields
         for c in string.characters
@@ -233,9 +233,9 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, KeyboardDel
     //  Takes the place of the 'shouldChangeCharactersInRange' delegate
     //  for the custom keyboard
     //
-    @IBAction func textFieldBeingEdited(sender: UITextField)
+    @IBAction func textFieldBeingEdited(_ sender: UITextField)
     {
-        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+        if UIDevice.current().userInterfaceIdiom == .pad {
             if let text = sender.text {
                 var c = text.characters
                 if c.count > Constants.TextFieldMaxLength {
@@ -250,7 +250,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, KeyboardDel
     //
     // MARK: required methods for keyboard delegate protocol
     //
-    func keyWasTapped(character: String) {
+    func keyWasTapped(_ character: String) {
         activeTextField.insertText(character)
     }
     
@@ -265,31 +265,31 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, KeyboardDel
     func registerForKeyboardNotifications()
     {
         //Adding notifies on keyboard appearing
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SettingsViewController.keyboardWasShown(_:)), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SettingsViewController.keyboardWillBeHidden(_:)), name: UIKeyboardWillHideNotification, object: nil)
+        NotificationCenter.default().addObserver(self, selector: #selector(SettingsViewController.keyboardWasShown(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default().addObserver(self, selector: #selector(SettingsViewController.keyboardWillBeHidden(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     
     func deregisterFromKeyboardNotifications()
     {
         //Removing notifies on keyboard appearing
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+        NotificationCenter.default().removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default().removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
-    func keyboardWasShown(notification: NSNotification)
+    func keyboardWasShown(_ notification: Notification)
     {
         //  Calculate keyboard exact size
-        let info : NSDictionary = notification.userInfo!
-        let keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue().size
+        let info : NSDictionary = (notification as NSNotification).userInfo!
+        let keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue().size
         
         var aRect : CGRect = dryerScrollView.frame
         aRect.size.height -= keyboardSize!.height
         
         // Get text field dimensions in superview's coordinate system
-        let textFieldRect = activeTextField.convertRect(activeTextField.bounds, toView: self.view)
+        let textFieldRect = activeTextField.convert(activeTextField.bounds, to: self.view)
 
-        if (!CGRectContainsPoint(aRect, textFieldRect.origin))
+        if (!aRect.contains(textFieldRect.origin))
         {
             let distanceToMove = textFieldRect.origin.y - aRect.size.height
             animateViewMoving(true, moveValue: CGFloat(distanceToMove))
@@ -297,13 +297,13 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, KeyboardDel
         }
     }
     
-    func keyboardWillBeHidden(notification: NSNotification)
+    func keyboardWillBeHidden(_ notification: Notification)
     {
         if keyboardCausedViewToMove {
             //Once keyboard disappears, restore original positions
-            let info : NSDictionary = notification.userInfo!
-            let keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue().size
-            let textFieldRect = activeTextField.convertRect(activeTextField.bounds, toView: self.view)
+            let info : NSDictionary = (notification as NSNotification).userInfo!
+            let keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue().size
+            let textFieldRect = activeTextField.convert(activeTextField.bounds, to: self.view)
             var aRect : CGRect = dryerScrollView.frame
             aRect.size.height -= keyboardSize!.height
             let distanceToMove = textFieldRect.origin.y - aRect.size.height
@@ -317,14 +317,14 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, KeyboardDel
     //  Animate view when keyboard appears. Otherwise, dryer minutes
     //  is hidden by the keyboard.
     //
-    func animateViewMoving (up:Bool, moveValue :CGFloat)
+    func animateViewMoving (_ up:Bool, moveValue :CGFloat)
     {
-        let movementDuration:NSTimeInterval = 0.3
+        let movementDuration:TimeInterval = 0.3
         let movement:CGFloat = ( up ? -moveValue : moveValue)
         UIView.beginAnimations( "animateView", context: nil)
         UIView.setAnimationBeginsFromCurrentState(true)
         UIView.setAnimationDuration(movementDuration )
-        self.view.frame = CGRectOffset(self.view.frame, 0,  movement)
+        self.view.frame = self.view.frame.offsetBy(dx: 0,  dy: movement)
         UIView.commitAnimations()
     }
     

@@ -10,11 +10,11 @@ import UIKit
 
 class LaundryView: UIView {
     
-    let washerColor1 = UIColor(red: 0.0/255.0, green: 174.0/255.0, blue: 255.0/255.0, alpha: 1.0).CGColor
-    let washerColor2 = UIColor(red: 0.0/255.0, green: 118.0/255.0, blue: 255.0/255.0, alpha: 1.0).CGColor
+    let washerColor1 = UIColor(red: 0.0/255.0, green: 174.0/255.0, blue: 255.0/255.0, alpha: 1.0).cgColor
+    let washerColor2 = UIColor(red: 0.0/255.0, green: 118.0/255.0, blue: 255.0/255.0, alpha: 1.0).cgColor
     
-    let dryerColor1 = UIColor(red: 255.0/255.0, green: 150.0/255.0, blue: 0.0/255.0, alpha: 1.0).CGColor
-    let dryerColor2 = UIColor(red: 254.0/255.0, green: 56.0/255.0, blue: 36.0/255.0, alpha: 1.0).CGColor
+    let dryerColor1 = UIColor(red: 255.0/255.0, green: 150.0/255.0, blue: 0.0/255.0, alpha: 1.0).cgColor
+    let dryerColor2 = UIColor(red: 254.0/255.0, green: 56.0/255.0, blue: 36.0/255.0, alpha: 1.0).cgColor
     
 
     //
@@ -33,7 +33,7 @@ class LaundryView: UIView {
 
     }
     
-    func createGradient(viewToGradiate: UIView, color1: CGColor, color2: CGColor) {
+    func createGradient(_ viewToGradiate: UIView, color1: CGColor, color2: CGColor) {
         //
         //  Clean up gradient sublayers before adding a new one
         //
@@ -49,7 +49,7 @@ class LaundryView: UIView {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = viewToGradiate.bounds
         gradientLayer.colors = [color1, color2]
-        viewToGradiate.layer.insertSublayer(gradientLayer, atIndex: 0)
+        viewToGradiate.layer.insertSublayer(gradientLayer, at: 0)
     }
     
 

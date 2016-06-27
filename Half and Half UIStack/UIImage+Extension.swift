@@ -9,8 +9,8 @@
 import UIKit
 
 extension UIImage {
-    class func imageWithColor(color: UIColor?) -> UIImage! {
-        let rect = CGRectMake(0.0, 0.0, 1.0, 1.0);
+    class func imageWithColor(_ color: UIColor?) -> UIImage! {
+        let rect = CGRect(x: 0.0, y: 0.0, width: 1.0, height: 1.0);
         
         UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
         
@@ -20,10 +20,10 @@ extension UIImage {
             color.setFill()
         }
         else {
-            UIColor.whiteColor().setFill()
+            UIColor.white().setFill()
         }
         
-        CGContextFillRect(context, rect);
+        context?.fill(rect);
         
         let image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();

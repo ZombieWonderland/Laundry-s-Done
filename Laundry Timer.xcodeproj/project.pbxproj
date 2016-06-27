@@ -215,12 +215,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Zombie Koala";
 				TargetAttributes = {
 					F2C26B7B1CB81A7F006BB71C = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = L2H3R2HESX;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 0;
@@ -229,10 +230,12 @@
 					};
 					F2C26B8F1CB81A7F006BB71C = {
 						CreatedOnToolsVersion = 7.3;
+						LastSwiftMigration = 0800;
 						TestTargetID = F2C26B7B1CB81A7F006BB71C;
 					};
 					F2C26B9A1CB81A7F006BB71C = {
 						CreatedOnToolsVersion = 7.3;
+						LastSwiftMigration = 0800;
 						TestTargetID = F2C26B7B1CB81A7F006BB71C;
 					};
 				};
@@ -448,6 +451,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zombiekoala.Laundry-timer";
 				PRODUCT_NAME = "Laundry Timer";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -461,6 +465,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zombiekoala.Laundry-timer";
 				PRODUCT_NAME = "Laundry Timer";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -473,6 +479,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zombiekoala.Half-and-Half-UIStackTests";
 				PRODUCT_NAME = "Laundry Timer";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Laundry Timer.app/Laundry Timer";
 			};
 			name = Debug;
@@ -485,6 +492,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zombiekoala.Half-and-Half-UIStackTests";
 				PRODUCT_NAME = "Laundry Timer";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Laundry Timer.app/Laundry Timer";
 			};
 			name = Release;
@@ -496,6 +505,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zombiekoala.Half-and-Half-UIStackUITests";
 				PRODUCT_NAME = "Laundry Timer";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "Half and Half UIStack";
 			};
 			name = Debug;
@@ -507,6 +517,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zombiekoala.Half-and-Half-UIStackUITests";
 				PRODUCT_NAME = "Laundry Timer";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "Half and Half UIStack";
 			};
 			name = Release;
